@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "Nico Aramy",
   description: "Portofolio",
   icons: {
-    icon: "/default.svg", //
+    icon: "/logo.svg", //
   },
 };
 

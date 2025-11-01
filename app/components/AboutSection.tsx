@@ -59,16 +59,18 @@ export default function AboutSection() {
           <div className="space-y-6 max-w-3xl">
             <div className="space-y-4">
               <p className={[trans, inView ? on : base, "delay-200 text-white/90 leading-relaxed"].join(" ")}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi efficitur, lacus a fermentum aliquet,
-                magna lacus molestie eros, ac ornare ipsum risus sed lorem. Curabitur id posuere leo.
+                I am a Full-Stack Developer who believes in the power of code to solve real-world problems.
+                My background in Computer Engineering and my hands-on experience in a hospital IT department taught me
+                resilience and the critical importance of building reliable, efficient systems under pressure.
               </p>
               <p className={[trans, inView ? on : base, "delay-300 text-white/90 leading-relaxed"].join(" ")}>
-                Praesent nec felis sollicitudin, efficitur justo at, rutrum elit. Aliquam vitae sem sed quam lacinia
-                volutpat. Integer sed arcu ac justo volutpat venenatis id non orci.
+                I specialize in creating modern web applications using JavaScript technologies like React, Node.js, and Express, 
+                with a strong focus on clean code and scalable architecture. My journey has also taken me from managing Linux servers 
+                to applying my technical problem-solving skills in a family business, giving me a unique, well-rounded perspective.
               </p>
               <p className={[trans, inView ? on : base, "delay-400 text-white/90 leading-relaxed"].join(" ")}>
-                Cras sodales, justo ac placerat vestibulum, dui tortor condimentum lectus, eu gravida tortor lorem non
-                justo. Sed imperdiet, mi non interdum efficitur, orci odio gravida arcu, ut porta nunc dui in nisi.
+                I am a lifelong learner, passionate about building, growing, and contributing to
+                meaningful projects that make a difference.
               </p>
             </div>
 

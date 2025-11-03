@@ -49,7 +49,7 @@ export default function AboutSection() {
         {/* Content grid: text left, image right */}
         <div
           className={[
-            "mt-8 grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-start",
+            "mt-8 grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-32 items-start",
             trans,
             inView ? on : base,
             "delay-150",
@@ -59,31 +59,47 @@ export default function AboutSection() {
           <div className="space-y-6 max-w-3xl">
             <div className="space-y-4">
               <p className={[trans, inView ? on : base, "delay-200 text-white/90 leading-relaxed"].join(" ")}>
-                I am a Full-Stack Developer who believes in the power of code to solve real-world problems.
-                My background in Computer Engineering and my hands-on experience in a hospital IT department taught me
+                I am a Full-Stack Developer who believes in the power of code to solve real-world problems. My
+                background in Computer Engineering and my hands-on experience in a hospital IT department taught me
                 resilience and the critical importance of building reliable, efficient systems under pressure.
               </p>
               <p className={[trans, inView ? on : base, "delay-300 text-white/90 leading-relaxed"].join(" ")}>
-                I specialize in creating modern web applications using JavaScript technologies like React, Node.js, and Express, 
-                with a strong focus on clean code and scalable architecture. My journey has also taken me from managing Linux servers 
-                to applying my technical problem-solving skills in a family business, giving me a unique, well-rounded perspective.
+                I specialize in creating modern web applications using JavaScript technologies like React, Node.js, and
+                Express, with a strong focus on clean code and scalable architecture. My journey has also taken me from
+                managing Linux servers to applying my technical problem-solving skills in a family business, giving me a
+                unique, well-rounded perspective.
               </p>
               <p className={[trans, inView ? on : base, "delay-400 text-white/90 leading-relaxed"].join(" ")}>
-                I am a lifelong learner, passionate about building, growing, and contributing to
-                meaningful projects that make a difference.
+                I am a lifelong learner, passionate about building, growing, and contributing to meaningful projects
+                that make a difference.
               </p>
             </div>
 
             <div className={[trans, inView ? on : base, "delay-500"].join(" ")}>
               <h4 className="text-lg font-semibold text-[#FCDDBC] mb-4">Technologies & Stack</h4>
-              <div className="grid grid-cols-2 gap-x-8 gap-y-3">
+              <h4 className="text-lg font-semibold text-[#FCDDBC] mb-4">Language</h4>
+              <div className="grid grid-cols-2 gap-x-8 gap-y-1">
                 <div className="group flex items-center space-x-3 text-white/80 hover:text-[#FCDDBC] transition-all duration-300 cursor-pointer hover:translate-x-1">
                   <div className="w-2 h-2 bg-[#FCDDBC] rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300"></div>
                   <span className="group-hover:font-medium transition-all duration-300">JavaScript</span>
                 </div>
                 <div className="group flex items-center space-x-3 text-white/80 hover:text-[#FCDDBC] transition-all duration-300 cursor-pointer hover:translate-x-1">
                   <div className="w-2 h-2 bg-[#FCDDBC] rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300"></div>
+                  <span className="group-hover:font-medium transition-all duration-300">TypeScript</span>
+                </div>
+                <div className="group flex items-center space-x-3 text-white/80 hover:text-[#FCDDBC] transition-all duration-300 cursor-pointer hover:translate-x-1">
+                  <div className="w-2 h-2 bg-[#FCDDBC] rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300"></div>
                   <span className="group-hover:font-medium transition-all duration-300">PHP</span>
+                </div>
+              </div>
+
+              <br />
+              <h4 className="text-lg font-semibold text-[#FCDDBC] mb-4">Frontend Framework / Libraries</h4>
+
+              <div className="grid grid-cols-2 gap-x-8 gap-y-1">
+                <div className="group flex items-center space-x-3 text-white/80 hover:text-[#FCDDBC] transition-all duration-300 cursor-pointer hover:translate-x-1">
+                  <div className="w-2 h-2 bg-[#FCDDBC] rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300"></div>
+                  <span className="group-hover:font-medium transition-all duration-300">React</span>
                 </div>
                 <div className="group flex items-center space-x-3 text-white/80 hover:text-[#FCDDBC] transition-all duration-300 cursor-pointer hover:translate-x-1">
                   <div className="w-2 h-2 bg-[#FCDDBC] rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300"></div>
@@ -93,21 +109,18 @@ export default function AboutSection() {
                   <div className="w-2 h-2 bg-[#FCDDBC] rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300"></div>
                   <span className="group-hover:font-medium transition-all duration-300">Nuxt</span>
                 </div>
-                <div className="group flex items-center space-x-3 text-white/80 hover:text-[#FCDDBC] transition-all duration-300 cursor-pointer hover:translate-x-1">
-                  <div className="w-2 h-2 bg-[#FCDDBC] rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300"></div>
-                  <span className="group-hover:font-medium transition-all duration-300">Laravel</span>
-                </div>
-                <div className="group flex items-center space-x-3 text-white/80 hover:text-[#FCDDBC] transition-all duration-300 cursor-pointer hover:translate-x-1">
-                  <div className="w-2 h-2 bg-[#FCDDBC] rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300"></div>
-                  <span className="group-hover:font-medium transition-all duration-300">TypeScript</span>
-                </div>
+              </div>
+
+              <h4 className="text-lg font-semibold text-[#FCDDBC] mb-4">Frontend Framework / Libraries</h4>
+
+              <div className="grid grid-cols-2 gap-x-8 gap-y-1">
                 <div className="group flex items-center space-x-3 text-white/80 hover:text-[#FCDDBC] transition-all duration-300 cursor-pointer hover:translate-x-1">
                   <div className="w-2 h-2 bg-[#FCDDBC] rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300"></div>
                   <span className="group-hover:font-medium transition-all duration-300">Node.js</span>
                 </div>
                 <div className="group flex items-center space-x-3 text-white/80 hover:text-[#FCDDBC] transition-all duration-300 cursor-pointer hover:translate-x-1">
                   <div className="w-2 h-2 bg-[#FCDDBC] rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300"></div>
-                  <span className="group-hover:font-medium transition-all duration-300">React</span>
+                  <span className="group-hover:font-medium transition-all duration-300">Laravel</span>
                 </div>
               </div>
             </div>
@@ -116,7 +129,7 @@ export default function AboutSection() {
           {/* Right: user image with enhanced frame */}
           <div
             className={[
-              "group mx-auto md:mx-0 w-56 sm:w-64 md:w-72 lg:w-80 aspect-square",
+              "group mx-auto md:mx-0 w-80 sm:w-64 md:w-72 lg:w-90 aspect-square",
               "relative",
               trans,
               inView ? on : base,

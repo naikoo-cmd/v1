@@ -100,10 +100,11 @@ function NavbarBase({ logoSrc = "/logo.svg", className = "logo" }: NavbarProps) 
           <Image
             src={logoSrc}
             alt="Logo"
-            width={28}
-            height={28}
-            priority
+            width={32}
+            height={32}
+            priority={false}
             className="transition-transform duration-200 motion-safe:group-hover:rotate-12"
+            // style={{ width: "auto" }}
           />
           <span className="sr-only">Home</span>
         </a>

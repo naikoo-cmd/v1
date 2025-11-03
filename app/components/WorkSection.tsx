@@ -55,7 +55,7 @@ export default function WorkSection() {
       description:
         "A full-featured e-commerce platform with product management, shopping cart, secure checkout, and admin dashboard. Built with modern technologies for optimal performance and user experience.",
       tech: ["Next.js", "TypeScript", "Tailwind CSS", "MySQL", "Stripe API"],
-      image: "/placeholder-project.jpg",
+      image: "/placeholder.jpg",
       links: {
         github: "https://github.com",
         live: "https://example.com",
@@ -67,7 +67,7 @@ export default function WorkSection() {
       description:
         "Comprehensive hospital information system with patient records, appointment scheduling, billing, and reporting modules. Designed for efficiency and compliance with healthcare standards.",
       tech: ["Laravel", "PHP", "MySQL", "Bootstrap", "Chart.js"],
-      image: "/placeholder-project.jpg",
+      image: "/placeholder.jpg",
       links: {
         github: "https://github.com",
       },
@@ -78,7 +78,7 @@ export default function WorkSection() {
       description:
         "A modern chat application with real-time messaging, group chats, file sharing, and user presence indicators. Built with WebSocket technology for instant communication.",
       tech: ["React", "Node.js", "Socket.io", "MongoDB", "Express"],
-      image: "/placeholder-project.jpg",
+      image: "/placeholder.jpg",
       links: {
         github: "https://github.com",
         live: "https://example.com",
@@ -123,7 +123,16 @@ function ProjectCard({
   reversed?: boolean;
 }) {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
   const delay = `delay-${150 + index * 100}`;
+
+  // Check if image is already loaded (from cache)
+  useEffect(() => {
+    const img = imgRef.current;
+    if (img?.complete && img.naturalHeight !== 0) {
+      setImageLoaded(true);
+    }
+  }, []);
 
   return (
     <div
@@ -142,27 +151,34 @@ function ProjectCard({
           reversed ? "lg:col-start-6" : "lg:col-start-1",
         ].join(" ")}
       >
-        {/* Placeholder or actual image */}
         <div className="relative aspect-video bg-[#2D2A2E] group-hover:scale-105 transition-transform duration-500">
-          {/* Placeholder pattern */}
-          {!imageLoaded && (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <svg className="w-24 h-24 text-white/10" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fillRule="evenodd"
-                  d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
-          )}
+          {/* Placeholder pattern - always shown behind */}
+          <div
+            className={[
+              "absolute inset-0 flex items-center justify-center transition-opacity duration-300",
+              imageLoaded ? "opacity-0" : "opacity-100",
+            ].join(" ")}
+          >
+            <svg className="w-24 h-24 text-white/10" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fillRule="evenodd"
+                d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </div>
 
-          {/* Actual image (hidden until loaded) */}
+          {/* Actual image - always rendered */}
           <img
+            ref={imgRef}
             src={project.image}
             alt={project.title}
+            loading="eager"
             onLoad={() => setImageLoaded(true)}
-            onError={() => setImageLoaded(false)}
+            onError={() => {
+              setImageLoaded(false);
+              console.error(`Failed to load image: ${project.title}`);
+            }}
             className={[
               "w-full h-full object-cover",
               "filter brightness-75 contrast-110 saturate-90",

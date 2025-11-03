@@ -46,12 +46,11 @@ export default function OtherProjectsSection() {
 
   const allProjects: Project[] = [
     {
-      title: "Restaurant Ordering System",
+      title: "Nuxt 3 API Movies",
       description:
-        "A modern restaurant ordering platform with real-time order tracking, payment integration, and admin dashboard for menu management.",
-      tech: ["React", "Node.js", "MongoDB", "Socket.io"],
-      github: "https://github.com",
-      external: "https://example.com",
+        "Movie DB Fetching Application built with Nuxt 3, utilizing The Movie Database (TMDb) API to provide users with an interactive platform to explore and discover movies. Features include dynamic routing, server-side rendering, and responsive design for optimal viewing across devices.",
+      tech: ["Nuxt 3", "Vue.js", "SSR", "API Integtaion"],
+      external: "https://fleava.nuxt3app.nicoaramy.com/",
     },
     {
       title: "Weather Forecast App",

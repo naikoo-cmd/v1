@@ -10,13 +10,13 @@ export default function Sidebar() {
   return (
     <aside
       className={[
-        // Transparent desktop sidebar (no bg), fixed under the navbar
-        "hidden md:flex fixed left-0 top-16 z-30 h-[calc(100vh-4rem)] w-16 items-start",
+        // Transparent desktop sidebar (no bg), fixed and vertically centered
+        "hidden md:flex fixed left-0 top-1/2 -translate-y-1/2 z-30 w-16 items-start",
         "transition-all duration-500 ease-out",
         visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2",
       ].join(" ")}
     >
-      <div className="mx-auto mt-4 flex flex-col items-center gap-4">
+      <div className="mx-auto flex flex-col items-center gap-4">
         {/* Social icons */}
         <a
           href="https://github.com/naikoo-cmd"

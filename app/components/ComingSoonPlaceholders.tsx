@@ -118,7 +118,6 @@ export default function ComingSoonPlaceholders({ count = 3 }: { count?: number }
             </button>
 
             <div className="text-center space-y-2">
-              <p className="font-mono text-xs uppercase tracking-wide text-[#69585F]">Placeholder</p>
               <h6 className="text-xl font-semibold text-[#2D2A2E]">{active.title}</h6>
               <p className="text-[#2D2A2E]/80">To be added later. {active.message}.</p>
               <div className="pt-2">

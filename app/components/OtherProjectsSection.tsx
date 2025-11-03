@@ -50,6 +50,7 @@ export default function OtherProjectsSection() {
       description:
         "Movie DB Fetching Application built with Nuxt 3, utilizing The Movie Database (TMDb) API to provide users with an interactive platform to explore and discover movies. Features include dynamic routing, server-side rendering, and responsive design for optimal viewing across devices.",
       tech: ["Nuxt 3", "Vue.js", "SSR", "API Integtaion"],
+      github: "https://github.com/naikoo-cmd/nuxt3_FE_Fleava-test",
       external: "https://fleava.nuxt3app.nicoaramy.com/",
     },
     {
@@ -57,7 +58,8 @@ export default function OtherProjectsSection() {
       description:
         "Clean weather application with 7-day forecasts, location search, and interactive weather maps using OpenWeather API.",
       tech: ["Vue.js", "TypeScript", "OpenWeather API", "Chart.js"],
-      github: "https://github.com",
+      github: "https://github.com/naikoo-cmd/openWeatherAPI",
+      external: "https://weatherapp.nicoaramy.com/",
     },
     {
       title: "Task Management Tool",

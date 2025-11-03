@@ -111,7 +111,7 @@ export default function AboutSection() {
                 </div>
               </div>
 
-              <h4 className="text-lg font-semibold text-[#FCDDBC] mb-4">Frontend Framework / Libraries</h4>
+              <h4 className="text-lg font-semibold text-[#FCDDBC] mb-4">Backend Framework / Libraries</h4>
 
               <div className="grid grid-cols-2 gap-x-8 gap-y-1">
                 <div className="group flex items-center space-x-3 text-white/80 hover:text-[#FCDDBC] transition-all duration-300 cursor-pointer hover:translate-x-1">

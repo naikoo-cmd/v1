@@ -55,8 +55,7 @@ export default function OtherProjectsSection() {
     },
     {
       title: "Weather Forecast App",
-      description:
-        "Clean weather application with 7-day forecasts, location search, and interactive weather maps using OpenWeather API.",
+      description: "Clean weather application with location search using OpenWeather API.",
       tech: ["Vue.js", "TypeScript", "OpenWeather API", "Chart.js"],
       github: "https://github.com/naikoo-cmd/openWeatherAPI",
       external: "https://weatherapp.nicoaramy.com/",

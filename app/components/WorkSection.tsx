@@ -47,18 +47,19 @@ const trans = "transition-all duration-700 ease-out motion-reduce:transition-non
 
 export default function WorkSection() {
   const { ref, inView } = useInView<HTMLDivElement>();
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; title: string } | null>(null);
 
   const projects: Project[] = [
     {
       featured: true,
-      title: "E-Commerce Platform",
+      title: "Real-Time Chat Application",
       description:
-        "A full-featured e-commerce platform with product management, shopping cart, secure checkout, and admin dashboard. Built with modern technologies for optimal performance and user experience.",
-      tech: ["Next.js", "TypeScript", "Tailwind CSS", "MySQL", "Stripe API"],
-      image: "/placeholder.jpg",
+        "A modern chat application featuring real-time messaging, image sharing, and live user presence. It offers multiple themes, a fully responsive interface that works seamlessly across all devices, and uses WebSocket technology for instant, smooth communication.",
+      tech: ["React", "Node.js", "Socket.io", "MongoDB", "Express 4", "Cloudinary API"],
+      image: "/chatyuk_preview.png",
       links: {
-        github: "https://github.com",
-        live: "https://example.com",
+        github: "https://github.com/naikoo-cmd/MERN-Realtime-Chat-App",
+        live: "https://chatyuk.nicoaramy.com",
       },
     },
     {
@@ -74,10 +75,10 @@ export default function WorkSection() {
     },
     {
       featured: true,
-      title: "Real-Time Chat Application",
+      title: "E-Commerce Platform",
       description:
-        "A modern chat application with real-time messaging, group chats, file sharing, and user presence indicators. Built with WebSocket technology for instant communication.",
-      tech: ["React", "Node.js", "Socket.io", "MongoDB", "Express"],
+        "A full-featured e-commerce platform with product management, shopping cart, secure checkout, and admin dashboard. Built with modern technologies for optimal performance and user experience.",
+      tech: ["Next.js", "TypeScript", "Tailwind CSS", "MySQL", "Stripe API"],
       image: "/placeholder.jpg",
       links: {
         github: "https://github.com",
@@ -86,28 +87,134 @@ export default function WorkSection() {
     },
   ];
 
+  // Handle lightbox
+  const openLightbox = (src: string, title: string) => {
+    setLightboxImage({ src, title });
+  };
+
+  const closeLightbox = () => {
+    setLightboxImage(null);
+  };
+
+  // Close on Escape key
+  useEffect(() => {
+    if (!lightboxImage) return;
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeLightbox();
+    };
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [lightboxImage]);
+
+  // Prevent body scroll when lightbox is open
+  useEffect(() => {
+    if (lightboxImage) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [lightboxImage]);
+
   return (
-    <section id="work" className="bg-[#000000]">
-      <div ref={ref} className="mx-auto max-w-6xl px-5 sm:px-6 lg:px-8 py-16 sm:py-24 min-h-screen">
-        {/* Title (left-aligned) */}
-        <div className={[trans, inView ? on : base, "delay-75"].join(" ")}>
-          <h3 className="text-2xl sm:text-3xl font-semibold text-white">
-            <span className="font-mono text-[#FCDDBC] mr-3">03.</span> Some Things I&apos;ve Built
-          </h3>
-          <div className="mt-2 h-px w-28 bg-white/30" />
-        </div>
+    <>
+      <section id="work" className="bg-[#000000]">
+        <div ref={ref} className="mx-auto max-w-6xl px-5 sm:px-6 lg:px-8 py-16 sm:py-24 min-h-screen">
+          {/* Title (left-aligned) */}
+          <div className={[trans, inView ? on : base, "delay-75"].join(" ")}>
+            <h3 className="text-2xl sm:text-3xl font-semibold text-white">
+              <span className="font-mono text-[#FCDDBC] mr-3">03.</span> Some Things I&apos;ve Built
+            </h3>
+            <div className="mt-2 h-px w-28 bg-white/30" />
+          </div>
 
-        {/* Projects list */}
-        <div className="mt-16 space-y-24">
-          {projects.map((project, idx) => (
-            <ProjectCard key={idx} project={project} index={idx} inView={inView} reversed={idx % 2 !== 0} />
-          ))}
-        </div>
+          {/* Projects list */}
+          <div className="mt-16 space-y-24">
+            {projects.map((project, idx) => (
+              <ProjectCard
+                key={idx}
+                project={project}
+                index={idx}
+                inView={inView}
+                reversed={idx % 2 !== 0}
+                onImageClick={openLightbox}
+              />
+            ))}
+          </div>
 
-        {/* Coming soon image placeholders (interactive popups) */}
-        <ComingSoonPlaceholders count={3} />
-      </div>
-    </section>
+          {/* Coming soon image placeholders (interactive popups) */}
+          <ComingSoonPlaceholders count={3} />
+        </div>
+      </section>
+
+      {/* Lightbox Modal */}
+      {lightboxImage && (
+        <div
+          className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn"
+          onClick={closeLightbox}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="lightbox-title"
+        >
+          <div className="relative max-w-[90vw] max-h-[90vh] animate-scaleIn" onClick={(e) => e.stopPropagation()}>
+            {/* Close button */}
+            <button
+              onClick={closeLightbox}
+              className="absolute -top-12 right-0 text-white/80 hover:text-white transition-colors duration-200 z-10"
+              aria-label="Close lightbox"
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Image title */}
+            <p id="lightbox-title" className="absolute -top-12 left-0 text-white/90 font-medium text-sm sm:text-base">
+              {lightboxImage.title}
+            </p>
+
+            {/* Image */}
+            <img
+              src={lightboxImage.src}
+              alt={lightboxImage.title}
+              className="max-w-full max-h-[90vh] w-auto h-auto object-contain rounded-lg shadow-2xl ring-1 ring-white/20"
+            />
+          </div>
+        </div>
+      )}
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes scaleIn {
+          from {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out;
+        }
+
+        .animate-scaleIn {
+          animation: scaleIn 0.3s ease-out;
+        }
+      `}</style>
+    </>
   );
 }
 
@@ -116,11 +223,13 @@ function ProjectCard({
   index,
   inView,
   reversed,
+  onImageClick,
 }: {
   project: Project;
   index: number;
   inView: boolean;
   reversed?: boolean;
+  onImageClick: (src: string, title: string) => void;
 }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -151,7 +260,11 @@ function ProjectCard({
           reversed ? "lg:col-start-6" : "lg:col-start-1",
         ].join(" ")}
       >
-        <div className="relative aspect-video bg-[#2D2A2E] group-hover:scale-105 transition-transform duration-500">
+        <button
+          onClick={() => onImageClick(project.image, project.title)}
+          className="relative aspect-video bg-[#2D2A2E] group-hover:scale-105 transition-transform duration-500 w-full cursor-zoom-in"
+          aria-label={`View larger image of ${project.title}`}
+        >
           {/* Placeholder pattern - always shown behind */}
           <div
             className={[
@@ -190,7 +303,21 @@ function ProjectCard({
 
           {/* Subtle overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
-        </div>
+
+          {/* Zoom indicator on hover */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="bg-black/60 backdrop-blur-sm rounded-full p-3">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"
+                />
+              </svg>
+            </div>
+          </div>
+        </button>
       </div>
 
       {/* Content container - spans 6 columns, overlaps image slightly */}

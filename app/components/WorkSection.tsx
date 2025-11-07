@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import ComingSoonPlaceholders from "@/app/components/ComingSoonPlaceholders";
 
 type Project = {
   featured: boolean;
@@ -143,9 +142,6 @@ export default function WorkSection() {
               />
             ))}
           </div>
-
-          {/* Coming soon image placeholders (interactive popups) */}
-          <ComingSoonPlaceholders count={3} />
         </div>
       </section>
 

@@ -63,7 +63,7 @@ function HomeIntroBase() {
           <div className={[trans, show ? on : base, "delay-700"].join(" ")}>
             <a
               href="/learn"
-              target="_blank"
+              // target="_blank"
               rel="noopener noreferrer"
               className={[
                 "inline-flex items-center justify-center",

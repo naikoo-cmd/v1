@@ -46,10 +46,10 @@ export default function ExperienceSection() {
   const jobs = useMemo<Job[]>(
     () => [
       {
-        company: "'",
-        role: "Full‑Stack Developer",
+        company: "Self-employed",
+        role: "Freelance Full‑Stack Developer",
         period: "Jan 2023 — Present",
-        location: "WFH",
+        location: "Remote - Aceh, Indonesia",
         points: [
           "Developed and maintained web applications using Laravel (PHP), Next.js/React (JavaScript), Express (Node.js), and databases such as MySQL and MongoDB.",
           "Designed and implemented authentication systems, CRUD functionalities, WebSocket features with Socket.io, and REST API integrations to support scalable application features",

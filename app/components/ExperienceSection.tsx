@@ -46,17 +46,22 @@ export default function ExperienceSection() {
   const jobs = useMemo<Job[]>(
     () => [
       {
-        company: "Remote",
+        company: "'",
         role: "Full‑Stack Developer",
         period: "Jan 2023 — Present",
         location: "WFH",
         points: [
-          "Developed and maintained web applications using Laravel (PHP), Next.js/React (JavaScript), and MySQL databases.",
-          "Designed and implemented authentication systems, CRUD functionalities, and REST API integrations to support scalable application features.",
-          "Built responsive and accessible user interfaces using Tailwind CSS, focusing on performance and usability across devices.",
-          "Deployed applications to Linux/Apache servers, managed environments, and utilized Git for version control and collaborative workflows.",
+          "Developed and maintained web applications using Laravel (PHP), Next.js/React (JavaScript), Express (Node.js), and databases such as MySQL and MongoDB.",
+          "Designed and implemented authentication systems, CRUD functionalities, WebSocket features with Socket.io, and REST API integrations to support scalable application features",
+          "Built responsive and accessible user interfaces using Tailwind CSS and DaisyUI, focusing on performance and usability across devices.",
+          "Implemented state management with Zustand for efficient and maintainable frontend architecture.",
+          "Deployed applications to Linux/Apache servers and cloud platforms like Render, managed environments, and utilized Git for version control and collaborative workflows.",
           "Conducted performance optimization, security validation, and functional testing to ensure stability and efficiency in production.",
           "Collaborated with clients to translate business requirements into technical solutions and deliver projects within deadlines.",
+          "Utilized Agile methodologies to manage project tasks, sprints, and continuous integration/continuous deployment (CI/CD) pipelines.",
+          "Monitored application performance and user feedback to implement iterative improvements and feature enhancements.",
+          "Documented codebases, APIs, and system architectures to facilitate team collaboration and future maintenance.",
+          "Stayed updated with emerging web technologies and industry trends to incorporate best practices into development processes.",
         ],
       },
       {

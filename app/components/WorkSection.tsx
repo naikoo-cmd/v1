@@ -65,7 +65,7 @@ const PROJECTS: Project[] = [
     description:
       "A personal blog platform that feels like your own playground. You control everything. Write, edit, publish, unpublish. Approve comments so trolls don’t slip in. Full CRUD for posts. And yeah, AI helps you fix your writer’s block so you don’t stare at a blank editor like a lost soul.",
     tech: ["Tailwind CSS,", "JavaScript", "Node.js", "Express", "MongoDB", "OpenAI API", "Cloudinary API"],
-    image: "/blog_preview.jpg",
+    image: "/blog_preview.png",
     links: {
       github: "https://github.com/naikoo-cmd/blog",
       live: "https://blog.nicoaramy.com",

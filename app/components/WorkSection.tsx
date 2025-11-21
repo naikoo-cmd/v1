@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 type Project = {
   featured: boolean;
@@ -40,60 +40,64 @@ function useInView<T extends HTMLElement>(opts?: IntersectionObserverInit) {
   return { ref, inView };
 }
 
+const cn = (...classes: Array<string | false | null | undefined>) => classes.filter(Boolean).join(" ");
+
 const base = "opacity-0 translate-y-3 will-change-[opacity,transform]";
 const on = "opacity-100 translate-y-0";
 const trans = "transition-all duration-700 ease-out motion-reduce:transition-none motion-reduce:transform-none";
+
+const PROJECTS: Project[] = [
+  {
+    featured: true,
+    title: "Real-Time Chat Application",
+    description:
+      "A modern chat application featuring real-time messaging, image sharing, and live user presence. It offers multiple themes, a fully responsive interface that works seamlessly across all devices, and uses WebSocket technology for instant, smooth communication.",
+    tech: ["React", "Node.js", "Socket.io", "MongoDB", "Express 4", "Cloudinary API"],
+    image: "/chatyuk_preview.png",
+    links: {
+      github: "https://github.com/naikoo-cmd/MERN-Realtime-Chat-App",
+      live: "https://chatyuk.nicoaramy.com",
+    },
+  },
+  {
+    featured: true,
+    title: "Blogging Platform with AI Integration",
+    description:
+      "A personal blog platform that feels like your own playground. You control everything. Write, edit, publish, unpublish. Approve comments so trolls don’t slip in. Full CRUD for posts. And yeah, AI helps you fix your writer’s block so you don’t stare at a blank editor like a lost soul.",
+    tech: ["Tailwind CSS,", "JavaScript", "Node.js", "Express", "MongoDB", "OpenAI API", "Cloudinary API"],
+    image: "/blog_preview.jpg",
+    links: {
+      github: "https://github.com/naikoo-cmd/blog",
+      live: "https://blog.nicoaramy.com",
+    },
+  },
+  {
+    featured: true,
+    title: "E-Commerce Platform",
+    description:
+      "A full-featured e-commerce platform with product management, shopping cart, secure checkout, and admin dashboard. Built with modern technologies for optimal performance and user experience.",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "MySQL", "Stripe API"],
+    image: "/placeholder.jpg",
+    links: {
+      github: "https://github.com",
+      live: "https://example.com",
+    },
+  },
+];
 
 export default function WorkSection() {
   const { ref, inView } = useInView<HTMLDivElement>();
   const [lightboxImage, setLightboxImage] = useState<{ src: string; title: string } | null>(null);
 
-  const projects: Project[] = [
-    {
-      featured: true,
-      title: "Real-Time Chat Application",
-      description:
-        "A modern chat application featuring real-time messaging, image sharing, and live user presence. It offers multiple themes, a fully responsive interface that works seamlessly across all devices, and uses WebSocket technology for instant, smooth communication.",
-      tech: ["React", "Node.js", "Socket.io", "MongoDB", "Express 4", "Cloudinary API"],
-      image: "/chatyuk_preview.png",
-      links: {
-        github: "https://github.com/naikoo-cmd/MERN-Realtime-Chat-App",
-        live: "https://chatyuk.nicoaramy.com",
-      },
-    },
-    {
-      featured: true,
-      title: "Hospital Management System",
-      description:
-        "Comprehensive hospital information system with patient records, appointment scheduling, billing, and reporting modules. Designed for efficiency and compliance with healthcare standards.",
-      tech: ["Laravel", "PHP", "MySQL", "Bootstrap", "Chart.js"],
-      image: "/placeholder.jpg",
-      links: {
-        github: "https://github.com",
-      },
-    },
-    {
-      featured: true,
-      title: "E-Commerce Platform",
-      description:
-        "A full-featured e-commerce platform with product management, shopping cart, secure checkout, and admin dashboard. Built with modern technologies for optimal performance and user experience.",
-      tech: ["Next.js", "TypeScript", "Tailwind CSS", "MySQL", "Stripe API"],
-      image: "/placeholder.jpg",
-      links: {
-        github: "https://github.com",
-        live: "https://example.com",
-      },
-    },
-  ];
+  const projects = useMemo(() => PROJECTS, []);
 
-  // Handle lightbox
-  const openLightbox = (src: string, title: string) => {
+  const openLightbox = useCallback((src: string, title: string) => {
     setLightboxImage({ src, title });
-  };
+  }, []);
 
-  const closeLightbox = () => {
+  const closeLightbox = useCallback(() => {
     setLightboxImage(null);
-  };
+  }, []);
 
   // Close on Escape key
   useEffect(() => {
@@ -122,7 +126,7 @@ export default function WorkSection() {
       <section id="work" className="bg-[#000000]">
         <div ref={ref} className="mx-auto max-w-6xl px-5 sm:px-6 lg:px-8 py-16 sm:py-24 min-h-screen">
           {/* Title (left-aligned) */}
-          <div className={[trans, inView ? on : base, "delay-75"].join(" ")}>
+          <div className={cn(trans, inView ? on : base, "delay-75")}>
             <h3 className="text-2xl sm:text-3xl font-semibold text-white">
               <span className="font-mono text-[#FCDDBC] mr-3">03.</span> Some Things I&apos;ve Built
             </h3>
@@ -148,7 +152,7 @@ export default function WorkSection() {
       {/* Lightbox Modal */}
       {lightboxImage && (
         <div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn"
+          className="fixed inset-0 z-60 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn"
           onClick={closeLightbox}
           role="dialog"
           aria-modal="true"
@@ -229,7 +233,7 @@ function ProjectCard({
 }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
-  const delay = `delay-${150 + index * 100}`;
+  const transitionDelay = useMemo(() => `${150 + index * 100}ms`, [index]);
 
   // Check if image is already loaded (from cache)
   useEffect(() => {
@@ -241,20 +245,15 @@ function ProjectCard({
 
   return (
     <div
-      className={[
-        "group relative grid grid-cols-1 lg:grid-cols-12 gap-6 items-center",
-        trans,
-        inView ? on : base,
-        delay,
-      ].join(" ")}
+      className={cn("group relative grid grid-cols-1 lg:grid-cols-12 gap-6 items-center", trans, inView ? on : base)}
+      style={{ transitionDelay }}
     >
       {/* Image container - spans 7 columns on desktop */}
       <div
-        className={[
-          "relative lg:col-span-7 rounded-lg overflow-hidden shadow-2xl",
-          "ring-1 ring-white/10",
-          reversed ? "lg:col-start-6" : "lg:col-start-1",
-        ].join(" ")}
+        className={cn(
+          "relative lg:col-span-7 rounded-lg overflow-hidden shadow-2xl ring-1 ring-white/10",
+          reversed ? "lg:col-start-6" : "lg:col-start-1"
+        )}
       >
         <button
           onClick={() => onImageClick(project.image, project.title)}
@@ -263,10 +262,10 @@ function ProjectCard({
         >
           {/* Placeholder pattern - always shown behind */}
           <div
-            className={[
+            className={cn(
               "absolute inset-0 flex items-center justify-center transition-opacity duration-300",
-              imageLoaded ? "opacity-0" : "opacity-100",
-            ].join(" ")}
+              imageLoaded ? "opacity-0" : "opacity-100"
+            )}
           >
             <svg className="w-24 h-24 text-white/10" fill="currentColor" viewBox="0 0 20 20">
               <path
@@ -288,17 +287,17 @@ function ProjectCard({
               setImageLoaded(false);
               console.error(`Failed to load image: ${project.title}`);
             }}
-            className={[
+            className={cn(
               "w-full h-full object-cover",
               "filter brightness-75 contrast-110 saturate-90",
               "group-hover:brightness-90 group-hover:saturate-100",
               "transition-all duration-500",
-              imageLoaded ? "opacity-100" : "opacity-0",
-            ].join(" ")}
+              imageLoaded ? "opacity-100" : "opacity-0"
+            )}
           />
 
           {/* Subtle overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
 
           {/* Zoom indicator on hover */}
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -318,10 +317,10 @@ function ProjectCard({
 
       {/* Content container - spans 6 columns, overlaps image slightly */}
       <div
-        className={[
+        className={cn(
           "relative lg:col-span-6 space-y-4",
-          reversed ? "lg:col-start-1 lg:row-start-1 lg:text-left" : "lg:col-start-7 lg:text-right",
-        ].join(" ")}
+          reversed ? "lg:col-start-1 lg:row-start-1 lg:text-left" : "lg:col-start-7 lg:text-right"
+        )}
       >
         {/* Featured label */}
         <p className="font-mono text-xs sm:text-sm text-[#FCDDBC]/80 uppercase tracking-wide">Featured Project</p>
@@ -346,10 +345,10 @@ function ProjectCard({
 
         {/* Tech stack */}
         <ul
-          className={[
+          className={cn(
             "flex flex-wrap gap-3 font-mono text-xs sm:text-sm text-white/70",
-            reversed ? "lg:justify-start" : "lg:justify-end",
-          ].join(" ")}
+            reversed ? "lg:justify-start" : "lg:justify-end"
+          )}
         >
           {project.tech.map((tech) => (
             <li
@@ -363,7 +362,7 @@ function ProjectCard({
 
         {/* Links (optional) */}
         {project.links && (
-          <div className={["flex gap-4", reversed ? "lg:justify-start" : "lg:justify-end"].join(" ")}>
+          <div className={cn("flex gap-4", reversed ? "lg:justify-start" : "lg:justify-end")}>
             {project.links.github && (
               <a
                 href={project.links.github}

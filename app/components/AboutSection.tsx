@@ -123,6 +123,23 @@ export default function AboutSection() {
                   <span className="group-hover:font-medium transition-all duration-300">Laravel</span>
                 </div>
               </div>
+
+              <h4 className="text-lg font-semibold text-[#FCDDBC] mb-4">Databases</h4>
+
+              <div className="grid grid-cols-2 gap-x-8 gap-y-1">
+                <div className="group flex items-center space-x-3 text-white/80 hover:text-[#FCDDBC] transition-all duration-300 cursor-pointer hover:translate-x-1">
+                  <div className="w-2 h-2 bg-[#FCDDBC] rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300"></div>
+                  <span className="group-hover:font-medium transition-all duration-300">MySQL</span>
+                </div>
+                <div className="group flex items-center space-x-3 text-white/80 hover:text-[#FCDDBC] transition-all duration-300 cursor-pointer hover:translate-x-1">
+                  <div className="w-2 h-2 bg-[#FCDDBC] rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300"></div>
+                  <span className="group-hover:font-medium transition-all duration-300">PostgreSQL</span>
+                </div>
+                <div className="group flex items-center space-x-3 text-white/80 hover:text-[#FCDDBC] transition-all duration-300 cursor-pointer hover:translate-x-1">
+                  <div className="w-2 h-2 bg-[#FCDDBC] rounded-full opacity-60 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300"></div>
+                  <span className="group-hover:font-medium transition-all duration-300">MongoDB</span>
+                </div>
+              </div>
             </div>
           </div>
 

@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -73,11 +74,11 @@ const PROJECTS: Project[] = [
   },
   {
     featured: true,
-    title: "E-Commerce Platform",
+    title: "E-Commerce Platform (Coming Soon)",
     description:
       "A full-featured e-commerce platform with product management, shopping cart, secure checkout, and admin dashboard. Built with modern technologies for optimal performance and user experience.",
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "MySQL", "Stripe API"],
-    image: "/placeholder.jpg",
+    image: "#",
     links: {
       github: "https://github.com",
       live: "https://example.com",
@@ -134,7 +135,7 @@ export default function WorkSection() {
           </div>
 
           {/* Projects list */}
-          <div className="mt-16 space-y-24">
+          <div className="mt-16 space-y-20 lg:space-y-24">
             {projects.map((project, idx) => (
               <ProjectCard
                 key={idx}
@@ -244,159 +245,138 @@ function ProjectCard({
   }, []);
 
   return (
-    <div
-      className={cn("group relative grid grid-cols-1 lg:grid-cols-12 gap-6 items-center", trans, inView ? on : base)}
+    <article
+      className={cn(
+        "group rounded-3xl border border-white/5 bg-white/[0.02] p-6 sm:p-8 shadow-[0_25px_80px_rgba(0,0,0,0.55)]",
+        trans,
+        inView ? on : base
+      )}
       style={{ transitionDelay }}
     >
-      {/* Image container - spans 7 columns on desktop */}
-      <div
-        className={cn(
-          "relative lg:col-span-7 rounded-lg overflow-hidden shadow-2xl ring-1 ring-white/10",
-          reversed ? "lg:col-start-6" : "lg:col-start-1"
-        )}
-      >
-        <button
-          onClick={() => onImageClick(project.image, project.title)}
-          className="relative aspect-video bg-[#2D2A2E] group-hover:scale-105 transition-transform duration-500 w-full cursor-zoom-in"
-          aria-label={`View larger image of ${project.title}`}
-        >
-          {/* Placeholder pattern - always shown behind */}
-          <div
-            className={cn(
-              "absolute inset-0 flex items-center justify-center transition-opacity duration-300",
-              imageLoaded ? "opacity-0" : "opacity-100"
-            )}
-          >
-            <svg className="w-24 h-24 text-white/10" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fillRule="evenodd"
-                d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </div>
-
-          {/* Actual image - always rendered */}
-          <img
-            ref={imgRef}
-            src={project.image}
-            alt={project.title}
-            loading="eager"
-            onLoad={() => setImageLoaded(true)}
-            onError={() => {
-              setImageLoaded(false);
-              console.error(`Failed to load image: ${project.title}`);
-            }}
-            className={cn(
-              "w-full h-full object-cover",
-              "filter brightness-75 contrast-110 saturate-90",
-              "group-hover:brightness-90 group-hover:saturate-100",
-              "transition-all duration-500",
-              imageLoaded ? "opacity-100" : "opacity-0"
-            )}
-          />
-
-          {/* Subtle overlay gradient */}
-          <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
-
-          {/* Zoom indicator on hover */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <div className="bg-black/60 backdrop-blur-sm rounded-full p-3">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"
-                />
-              </svg>
-            </div>
-          </div>
-        </button>
-      </div>
-
-      {/* Content container - spans 6 columns, overlaps image slightly */}
-      <div
-        className={cn(
-          "relative lg:col-span-6 space-y-4",
-          reversed ? "lg:col-start-1 lg:row-start-1 lg:text-left" : "lg:col-start-7 lg:text-right"
-        )}
-      >
-        {/* Featured label */}
-        <p className="font-mono text-xs sm:text-sm text-[#FCDDBC]/80 uppercase tracking-wide">Featured Project</p>
-
-        {/* Project title */}
-        <h4 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#FCDDBC] transition-colors duration-300">
-          {project.title}
-        </h4>
-
-        {/* Description box - semi-transparent overlay style */}
-        <div
-          className={[
-            "relative z-10 p-5 rounded-md shadow-lg",
-            "bg-[#2D2A2E]/95 backdrop-blur-sm",
-            "ring-1 ring-white/10",
-            "group-hover:bg-[#2D2A2E] group-hover:ring-[#FCDDBC]/20",
-            "transition-all duration-300",
-          ].join(" ")}
-        >
-          <p className="text-sm sm:text-base text-white/90 leading-relaxed">{project.description}</p>
-        </div>
-
-        {/* Tech stack */}
-        <ul
-          className={cn(
-            "flex flex-wrap gap-3 font-mono text-xs sm:text-sm text-white/70",
-            reversed ? "lg:justify-start" : "lg:justify-end"
-          )}
-        >
-          {project.tech.map((tech) => (
-            <li
-              key={tech}
-              className="hover:text-[#FCDDBC] transition-colors duration-200 cursor-default whitespace-nowrap"
+      <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
+        {/* Media */}
+        <div className={cn("relative order-1", reversed ? "lg:order-2" : "lg:order-1")}>
+          <div className="overflow-hidden rounded-2xl bg-[#1B1B1F] ring-1 ring-white/10">
+            <button
+              onClick={() => onImageClick(project.image, project.title)}
+              className="relative block w-full cursor-zoom-in"
+              aria-label={`View larger image of ${project.title}`}
             >
-              {tech}
-            </li>
-          ))}
-        </ul>
-
-        {/* Links (optional) */}
-        {project.links && (
-          <div className={cn("flex gap-4", reversed ? "lg:justify-start" : "lg:justify-end")}>
-            {project.links.github && (
-              <a
-                href={project.links.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/70 hover:text-[#FCDDBC] transition-colors duration-200"
-                aria-label="GitHub repository"
+              <div
+                className={cn(
+                  "absolute inset-0 flex items-center justify-center transition-opacity duration-300",
+                  imageLoaded ? "opacity-0" : "opacity-100"
+                )}
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                </svg>
-              </a>
-            )}
-            {project.links.live && (
-              <a
-                href={project.links.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/70 hover:text-[#FCDDBC] transition-colors duration-200"
-                aria-label="Live demo"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="h-14 w-14 text-white/15" fill="currentColor" viewBox="0 0 20 20">
                   <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    fillRule="evenodd"
+                    d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                    clipRule="evenodd"
                   />
                 </svg>
-              </a>
+              </div>
+
+              <img
+                ref={imgRef}
+                src={project.image}
+                alt={project.title}
+                loading="eager"
+                onLoad={() => setImageLoaded(true)}
+                onError={() => {
+                  setImageLoaded(false);
+                  console.error(`Failed to load image: ${project.title}`);
+                }}
+                className={cn(
+                  "aspect-[16/10] w-full object-cover transition-all duration-500",
+                  "brightness-[0.9] contrast-110 saturate-[0.95] group-hover:scale-[1.02] group-hover:brightness-100",
+                  imageLoaded ? "opacity-100" : "opacity-0"
+                )}
+              />
+
+              <span className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-tr from-black/40 via-transparent to-white/10 opacity-60 transition-opacity duration-500 group-hover:opacity-30" />
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div
+          className={cn(
+            "order-2 flex flex-col gap-5 text-white",
+            reversed ? "lg:order-1 lg:text-right lg:items-end" : "lg:order-2 lg:text-left"
+          )}
+        >
+          <div
+            className={cn(
+              "flex w-full flex-wrap items-center gap-4 text-white/70",
+              reversed ? "lg:justify-end" : "lg:justify-start"
+            )}
+          >
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#FCDDBC]/80">
+              {project.featured ? "Featured Project" : "Case Study"}
+            </p>
+
+            {project.links && (
+              <div className={cn("flex items-center gap-4", reversed ? "lg:flex-row-reverse" : "ml-auto")}>
+                {project.links.github && (
+                  <a
+                    href={project.links.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/70 transition-colors duration-200 hover:text-[#FCDDBC]"
+                    aria-label="GitHub repository"
+                  >
+                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 0C5.373 0 0 5.373 0 12a12 12 0 008.207 11.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.009-.322 3.302 1.23a10.13 10.13 0 013.003-.404 10.13 10.13 0 013.006.404c2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576A12.002 12.002 0 0024 12c0-6.627-5.373-12-12-12z" />
+                    </svg>
+                  </a>
+                )}
+                {project.links.live && (
+                  <a
+                    href={project.links.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/70 transition-colors duration-200 hover:text-[#FCDDBC]"
+                    aria-label="Live demo"
+                  >
+                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </a>
+                )}
+              </div>
             )}
           </div>
-        )}
+
+          <div className="max-w-xl">
+            <h4 className="text-2xl font-semibold tracking-tight transition-colors duration-300 group-hover:text-[#FCDDBC]">
+              {project.title}
+            </h4>
+            <p className="mt-3 text-sm sm:text-base leading-relaxed text-white/80">{project.description}</p>
+          </div>
+
+          <ul
+            className={cn(
+              "flex flex-wrap gap-3 text-[13px] font-mono text-white/70",
+              reversed ? "lg:justify-end" : "lg:justify-start"
+            )}
+          >
+            {project.tech.map((tech) => (
+              <li
+                key={tech}
+                className="rounded-full border border-white/10 px-3 py-1 transition-colors duration-200 hover:border-[#FCDDBC]/40 hover:text-[#FCDDBC]"
+              >
+                {tech}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
+    </article>
   );
 }

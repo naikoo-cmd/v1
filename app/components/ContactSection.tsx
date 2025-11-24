@@ -115,7 +115,7 @@ export default function ContactSection() {
           <div className="flex-grow flex flex-col items-center justify-center text-center space-y-6">
             {/* Number + Title */}
             <div className={[trans, inView ? on : base, "delay-75"].join(" ")}>
-              <p className="font-mono text-sm text-[#69585F] mb-2">04. What&apos;s Next?</p>
+              <p className="font-mono text-sm text-[#69585F] mb-2">05. What&apos;s Next?</p>
               <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#2D2A2E]">Get In Touch</h3>
             </div>
 
@@ -155,7 +155,7 @@ export default function ContactSection() {
           {/* Footer */}
           <footer className={["mt-16 text-center", trans, inView ? on : base, "delay-500"].join(" ")}>
             <p className="text-sm text-[#2D2A2E]/60 hover:text-[#2D2A2E] transition-colors duration-200 cursor-default">
-              Designed & built by Nico Aramy
+              Designed & built by Nico Aramy &copy; {new Date().getFullYear()}
             </p>
           </footer>
         </div>

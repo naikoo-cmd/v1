@@ -10,7 +10,8 @@ const NAV_ITEMS: readonly NavItem[] = Object.freeze([
   { number: "01.", label: "About", href: "#about" },
   { number: "02.", label: "Experience", href: "#experience" },
   { number: "03.", label: "Work", href: "#work" },
-  { number: "04.", label: "Contact", href: "#contact" },
+  { number: "04.", label: "SaaS", href: "#saas" },
+  { number: "05.", label: "Contact", href: "#contact" },
   { number: "", label: "Resume", href: "/resume" },
 ] as const);
 

@@ -67,7 +67,7 @@ export default function ExperienceSection() {
       {
         company: "Paperless Hospital",
         role: "On-site Web Developer",
-        period: "Jul-Aug 2025",
+        period: "2025",
         location: "RSUD Muhammad Ali Kasim | Gayo Lues",
         points: [
           "Provided day-to-day technical support for SIMRS (Hospital Information System) users, assisting medical and administrative staff in resolving software, hardware, and access issues to maintain smooth hospital operations.",
@@ -81,8 +81,8 @@ export default function ExperienceSection() {
         ],
       },
       {
-        company: "Cendekia",
-        role: "IT / Administrative",
+        company: "Cendekia School",
+        role: "IT & Administrative Staff",
         period: "Feb 2022-Jun 2025",
         location: "Aceh",
         points: [

@@ -55,14 +55,13 @@ function HomeIntroBase() {
               "delay-500",
             ].join(" ")}
           >
-            Let's build amazing, responsive websites together! I break down modern tech and clean code so you can create
-            powerful digital experiences. Ready to learn? Check out the link below!
+            I build fast and clean responsive websites. I break down modern tech in a way that’s easy to follow. You can check out my work below.
           </p>
 
           {/* CTA Button */}
           <div className={[trans, show ? on : base, "delay-700"].join(" ")}>
             <a
-              href="/learn"
+              href="#work"
               // target="_blank"
               rel="noopener noreferrer"
               className={[

@@ -5,9 +5,10 @@ import HomeIntro from "@/app/components/HomeIntro";
 import AboutSection from "@/app/components/AboutSection";
 import ExperienceSection from "@/app/components/ExperienceSection";
 import WorkSection from "@/app/components/WorkSection";
+import SaasSection from "@/app/components/SaasSection";
 import OtherProjectsSection from "@/app/components/OtherProjectsSection";
-import ContactSection from "@/app/components/ContactSection"; // NEW
-import ScrollToTopButton from "@/app/components/ScrollToTopButton"; // NEW
+import ContactSection from "@/app/components/ContactSection"; 
+import ScrollToTopButton from "@/app/components/ScrollToTopButton";
 
 export default function Home() {
   return (
@@ -31,6 +32,9 @@ export default function Home() {
 
         {/* Other noteworthy projects section */}
         <OtherProjectsSection />
+
+        {/* SaaS accelerator section */}
+        <SaasSection />
 
         {/* Contact section with modal */}
         <ContactSection />

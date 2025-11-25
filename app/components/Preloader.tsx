@@ -27,13 +27,16 @@ function PreloaderBase({
   const animDone = useRef(false);
   const lottieRef = useRef<LottieRefCurrentProps>(null);
 
-  // Fetch JSON from /public once
+  // Fetch JSON from /public once with caching
   useEffect(() => {
     let active = true;
     (async () => {
       try {
-        // Encode once; avoid double-encoding e.g. "%2520"
-        const res = await fetch(encodeURI(src));
+        // Use cache-first strategy for Lottie JSON
+        const res = await fetch(encodeURI(src), {
+          cache: "force-cache",
+        });
+        if (!res.ok) throw new Error("Failed to fetch");
         const data = await res.json();
         if (active) setAnimationData(data);
       } catch {

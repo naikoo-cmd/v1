@@ -16,7 +16,13 @@ export const metadata: Metadata = {
   title: "Nico Aramy",
   description: "Portofolio",
   icons: {
-    icon: "/logo.svg", //
+    icon: "/logo.svg",
+  },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://nicoaramy.com"),
+  openGraph: {
+    title: "Nico Aramy",
+    description: "Portofolio",
+    type: "website",
   },
 };
 

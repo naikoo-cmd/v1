@@ -1,14 +1,27 @@
+import dynamic from "next/dynamic";
 import Navbar from "@/app/components/Navbar";
 import PreloaderGate from "@/app/components/PreloaderGate";
 import Sidebar from "@/app/components/Sidebar";
 import HomeIntro from "@/app/components/HomeIntro";
 import AboutSection from "@/app/components/AboutSection";
-import ExperienceSection from "@/app/components/ExperienceSection";
-import WorkSection from "@/app/components/WorkSection";
-import SaasSection from "@/app/components/SaasSection";
-import OtherProjectsSection from "@/app/components/OtherProjectsSection";
-import ContactSection from "@/app/components/ContactSection"; 
-import ScrollToTopButton from "@/app/components/ScrollToTopButton";
+
+// Lazy load below-the-fold components
+const ExperienceSection = dynamic(() => import("@/app/components/ExperienceSection"), {
+  loading: () => <div className="min-h-screen" />,
+});
+const WorkSection = dynamic(() => import("@/app/components/WorkSection"), {
+  loading: () => <div className="min-h-screen" />,
+});
+const OtherProjectsSection = dynamic(() => import("@/app/components/OtherProjectsSection"), {
+  loading: () => <div className="min-h-[400px]" />,
+});
+const SaasSection = dynamic(() => import("@/app/components/SaasSection"), {
+  loading: () => <div className="min-h-[400px]" />,
+});
+const ContactSection = dynamic(() => import("@/app/components/ContactSection"), {
+  loading: () => <div className="min-h-[400px]" />,
+});
+const ScrollToTopButton = dynamic(() => import("@/app/components/ScrollToTopButton"));
 
 export default function Home() {
   return (

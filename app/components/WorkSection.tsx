@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 
 type Project = {
   featured: boolean;
@@ -233,16 +234,7 @@ function ProjectCard({
   onImageClick: (src: string, title: string) => void;
 }) {
   const [imageLoaded, setImageLoaded] = useState(false);
-  const imgRef = useRef<HTMLImageElement>(null);
   const transitionDelay = useMemo(() => `${150 + index * 100}ms`, [index]);
-
-  // Check if image is already loaded (from cache)
-  useEffect(() => {
-    const img = imgRef.current;
-    if (img?.complete && img.naturalHeight !== 0) {
-      setImageLoaded(true);
-    }
-  }, []);
 
   return (
     <article
@@ -277,22 +269,30 @@ function ProjectCard({
                 </svg>
               </div>
 
-              <img
-                ref={imgRef}
-                src={project.image}
-                alt={project.title}
-                loading="eager"
-                onLoad={() => setImageLoaded(true)}
-                onError={() => {
-                  setImageLoaded(false);
-                  console.error(`Failed to load image: ${project.title}`);
-                }}
-                className={cn(
-                  "aspect-[16/10] w-full object-cover transition-all duration-500",
-                  "brightness-[0.9] contrast-110 saturate-[0.95] group-hover:scale-[1.02] group-hover:brightness-100",
-                  imageLoaded ? "opacity-100" : "opacity-0"
-                )}
-              />
+              {project.image && project.image !== "#" ? (
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                    loading={index === 0 ? "eager" : "lazy"}
+                    onLoad={() => setImageLoaded(true)}
+                    className={cn(
+                      "object-cover transition-all duration-500",
+                      "brightness-[0.9] contrast-110 saturate-[0.95] group-hover:scale-[1.02] group-hover:brightness-100",
+                      imageLoaded ? "opacity-100" : "opacity-0"
+                    )}
+                    quality={85}
+                    placeholder="blur"
+                    blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI3NTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzFCMUIxRiIvPjwvc3ZnPg=="
+                  />
+                </div>
+              ) : (
+                <div className="aspect-[16/10] w-full bg-[#1B1B1F] flex items-center justify-center rounded-2xl">
+                  <p className="text-white/40 text-sm">Coming Soon</p>
+                </div>
+              )}
 
               <span className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-tr from-black/40 via-transparent to-white/10 opacity-60 transition-opacity duration-500 group-hover:opacity-30" />
             </button>

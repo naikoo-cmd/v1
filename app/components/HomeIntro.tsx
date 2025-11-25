@@ -62,7 +62,6 @@ function HomeIntroBase() {
           <div className={[trans, show ? on : base, "delay-700"].join(" ")}>
             <a
               href="#work"
-              // target="_blank"
               rel="noopener noreferrer"
               className={[
                 "inline-flex items-center justify-center",
@@ -75,6 +74,13 @@ function HomeIntroBase() {
                 "focus:outline-none focus:ring-2 focus:ring-[#FCDDBC]/50 focus:ring-offset-2",
                 "active:translate-y-0 active:shadow-md",
               ].join(" ")}
+              onClick={e => {
+                e.preventDefault();
+                const target = document.getElementById("work");
+                if (target) {
+                  target.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
             >
               Build with Me!
             </a>
